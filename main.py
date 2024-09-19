@@ -10,8 +10,11 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import PlainTextResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
 from pathlib import Path
-
+from dotenv import load_dotenv
 from config import BASE_URL
+
+# Load environment variables from .env file
+load_dotenv()
 
 app = FastAPI()
 
@@ -20,6 +23,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 @app.get("/")
 async def read_index():
+    xlwings_license = os.getenv('XLWINGS_LICENSE_KEY')
     return FileResponse("static/index.html")
 
 @app.post("/forecastingapicall")
