@@ -1,0 +1,76 @@
+body {
+    background-color: black; /* Darker background color */
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+#container {
+    width: 800px;
+    margin: 50px auto;
+    text-align: left; /* Align content to the left */
+}
+
+#container img {
+    max-width: 100%; /* Scale image down if it's too wide */
+    height: auto;    /* Maintain aspect ratio */
+    display: block;  /* Remove any extra space below the image */
+}
+
+#graphContainer {
+    display: flex;
+    align-items: flex-start; /* Align items to the top */
+}
+
+#description {
+    flex: 1; /* Occupy 30% of the width */
+    max-width: 300px; /* Limit maximum width */
+    padding-right: 20px; /* Add space between description and graph */
+}
+
+#graph {
+    flex: 1; /* Occupy 70% of the width */
+    height: 500px;
+}
+
+button {
+    margin-bottom: 20px; /* Add spacing between the button and the graph */
+    background-color: #4CAF50; /* Dark green background */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049; /* Dark green hover */
+}
+
+#menu {
+    display: flex;
+    justify-content: flex-start; /* Align menu to the left */
+    padding: 10px;
+    background-color: #333;
+    margin-bottom: 20px; /* Add margin to separate menu from the rest */
+}
+
+#menu a {
+    color: #ffffff;
+    text-decoration: none;
+    margin-right: 20px; /* Add margin between menu items */
+}
+
+#menu a:first-child {
+    margin-left: 20px; /* Add left margin to the first link */
+}
+
+a:hover {
+    color: #4CAF50; /* Dark green hover */
+}
+
+a:visited {
+    color: orange; /* White visited link */
+}

@@ -5,11 +5,20 @@ import xlwings as xw
 
 from fastapi import Body, FastAPI, status
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import PlainTextResponse
+from fastapi.responses import PlainTextResponse, FileResponse
+from fastapi.staticfiles import StaticFiles
+from pathlib import Path
 
 from config import BASE_URL
 
 app = FastAPI()
+
+# Mount the static files directory
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+@app.get("/")
+async def read_index():
+    return FileResponse("static/index.html")
 
 @app.post("/forecastingapicall")
 def api_call(token: str, 
