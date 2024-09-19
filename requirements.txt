@@ -1,0 +1,11 @@
+uvicorn
+fastapi
+Jinja2
+PyJWT
+numpy
+pandas
+pydantic
+python-dotenv
+requests
+itsdangerous
+xlwings
