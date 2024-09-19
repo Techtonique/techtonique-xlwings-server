@@ -67,6 +67,10 @@ button:hover {
     margin-left: 20px; /* Add left margin to the first link */
 }
 
+a:link {
+    color: #4CAF50; /* Dark green link */
+}
+
 a:hover {
     color: #4CAF50; /* Dark green hover */
 }

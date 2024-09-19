@@ -1,9 +1,11 @@
 import json 
+import mimetypes
 import os
 import requests
 import xlwings as xw
 
-from fastapi import Body, FastAPI, status
+from urllib.parse import urlparse
+from fastapi import Body, FastAPI, status, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import PlainTextResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
@@ -22,8 +24,8 @@ async def read_index():
 
 @app.post("/forecastingapicall")
 def api_call(token: str, 
-             filename: str, 
-             apiroute: str,            
+             apiroute: str,  
+             filename: str,          
              data: dict = Body,
              method: str = 'RidgeCV',
              n_hidden_features: int = 5,
@@ -43,12 +45,32 @@ def api_call(token: str,
     'replications': str(replications),
     'h': str(h)}
 
+    # Download the file from the URL
+    response = requests.get(filename)
+    
+    if response.status_code != 200:
+        return {"error": "Failed to download file"}
+
+    # Extract the filename from the URL
+    parsed_url = urlparse(filename)
+    local_filename = os.path.basename(parsed_url.path)
+    
+    # Get the content type
+    content_type, _ = mimetypes.guess_type(local_filename)
+
+    # If content_type couldn't be guessed, default to 'application/octet-stream'
+    if content_type is None:
+        content_type = 'application/octet-stream'
+
+    # Prepare the file for uploading (file content, filename, and content_type)
+    file_content = response.content
     files = {
-        'file': open(filename, 'rb'),
+        'file': (local_filename, file_content, content_type)
     }
 
     response = requests.post(BASE_URL + apiroute, 
-        params=params, headers=headers, files=files)
+        params=params, headers=headers, 
+        files=files)
 
     res = response.json()
 

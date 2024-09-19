@@ -5,7 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simple xlwings server for Techtonique API </title>
     <link rel="stylesheet" type="text/css" href="static/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+    <!-- Highlight.js CSS for Tomorrow Night Dark theme -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/tomorrow-night-dark.min.css">
+    <!-- Highlight.js JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <!-- Optional: If you want to include VBA language support explicitly -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/vbscript.min.js"></script>    
 </head>
 <body>
 
@@ -32,11 +37,11 @@
             <h2>xlwings</h2>
             <h3>Activate an xlwings developer key</h3>
             <p>
-                <a href="">xlwings server</a> is one of the tools that will allow you to use Techtonique API directly in Excel.
+                <a href="https://github.com/Techtonique/techtonique-excel/tree/main/xlwings-server-demo">xlwings server</a> is one of the tools that will allow you to use Techtonique API directly in Excel.
                 To use xlwings PRO locally in your development environment, it’s easiest to run the following command:
             </p>
-            <pre language="bash">
-                <code>
+            <pre>
+                <code class="language-bash">
                     xlwings license update -k YOUR_LICENSE_KEY
                 </code>
             </pre>    
@@ -47,10 +52,11 @@
             </p>
             
             <h2>In VBA Excel, create</h2>
-            See <a href="https://server.xlwings.org/en/latest/">example xlsm file</a>
+            See <a href="https://github.com/Techtonique/techtonique-excel/blob/main/xlwings-server-demo/demo-forecasting.xlsm">example xlsm file</a>
+            
             <p>
                 <pre>
-                    <code language="vbscript">
+                    <code class="language-vbscript">
                         Sub SampleRemoteCall()
                     
                             Dim token, token_query As String
@@ -77,15 +83,19 @@
                 <br> 
                 <img src="static/result-vba.png" alt="Example output from VBA">
             </p>
+
     <h1 id="#techtonique-r">R | <a href="#">Top</a></h1>    
     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Animi, esse cumque? 
         Temporibus commodi unde beatae quisquam at ullam laboriosam blanditiis 
-        perferendis consequuntur qui necessitatibus et corrupti, ut totam natus consequatur.</p>
+        perferendis consequuntur qui necessitatibus et corrupti, ut totam natus consequatur.
+    </p>
 
     <h1 id="#techtonique-python">Python | <a href="#">Top</a></h1>    
     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Animi, esse cumque? 
         Temporibus commodi unde beatae quisquam at ullam laboriosam blanditiis 
-        perferendis consequuntur qui necessitatibus et corrupti, ut totam natus consequatur.</p>
+        perferendis consequuntur qui necessitatibus et corrupti, ut totam natus consequatur.
+    </p>
+    
     <h1 id="#techtonique-ajax">Javascript (AJAX) | <a href="#">Top</a></h1>
     
     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Animi, esse cumque? 
@@ -97,11 +107,11 @@
         Temporibus commodi unde beatae quisquam at ullam laboriosam blanditiis 
         perferendis consequuntur qui necessitatibus et corrupti, ut totam natus consequatur.</p>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-
-    <!-- and it's easy to individually load additional languages -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/vbscript.min.js"></script>
-
-    <script>hljs.highlightAll();</script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+          hljs.highlightAll();
+        });
+      </script>
 </body>
 </html>
