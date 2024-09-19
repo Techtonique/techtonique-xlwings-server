@@ -58,25 +58,28 @@
                 <pre>
                     <code class="language-vbscript">
                         Sub SampleRemoteCall()
-                    
-                            Dim token, token_query As String
-                            Dim file_name, file_name_query As String
-                            Dim api_route, api_route_query As String
-                            Dim other_query As String
-                            
-                            ' provide only these 3
-                            token = "YOUR_TOKEN"
-                            file_name = "/Users/t/Documents/datasets/time_series/univariate/USAccDeaths.csv"
-                            api_route = "forecastingreglinear"
-                            
-                            token_query = "token=" & token
-                            file_name_query = "&filename=" & file_name
-                            api_route_query = "&apiroute=" & api_route
-                            other_query = "&method=LarsCV"
-                            
-                            RunRemotePython "http://127.0.0.1:8001/forecastingapicall?" & token_query & file_name_query & api_route_query & other_query, apiKey:="DEVELOPMENT"
-                        End Sub
-                        </code>                    
+
+                        Dim BASE_URL As String
+                        Dim token, token_query As String
+                        Dim file_name, file_name_query As String
+                        Dim api_route, api_route_query As String
+                        Dim other_query, full_query As String
+                        
+                        ' provide only these 3
+                        BASE_URL = "https://techtonique-xlwings-server-1793f0ffd160.herokuapp.com/"
+                        token = "Y0UR_TOKEN"
+                        file_name = "https://raw.githubusercontent.com/Techtonique/datasets/refs/heads/main/time_series/univariate/AirPassengers.csv"
+                        api_route = "forecastingreglinear"
+                        
+                        token_query = "token=" & token
+                        file_name_query = "&filename=" & file_name
+                        api_route_query = "&apiroute=" & api_route
+                        other_query = "&method=LarsCV"
+                        full_query = BASE_URL & "forecastingapicall?" & token_query & file_name_query & api_route_query & other_query
+                        
+                        RunRemotePython full_query, apiKey:="DEVELOPMENT"
+                    End Sub                        
+                    </code>                    
                 </pre>           
                 You should obtain something like this:
                 <br> 
@@ -95,7 +98,7 @@
         Temporibus commodi unde beatae quisquam at ullam laboriosam blanditiis 
         perferendis consequuntur qui necessitatibus et corrupti, ut totam natus consequatur.
     </p>
-    
+
     <h1 id="#techtonique-ajax">Javascript (AJAX) | <a href="#">Top</a></h1>
     
     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Animi, esse cumque? 
