@@ -2,6 +2,9 @@
 # xlwings server for [Techtonique's API](https:www.techtonique.net/about) 
 
 A server (that you can reproduce) allowing you to make API calls in Microsoft Excel. 
+Example of Excel (VBA) client: 
+
+[https://github.com/thierrymoudiki/xlwings-server-tests](https://github.com/thierrymoudiki/xlwings-server-tests)
 
 For more details, visit: 
 
