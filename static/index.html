@@ -16,101 +16,42 @@
 
     <div id="container">
         
-        <div id="menu">
-            <a href="#xlwings-server">Excel xlwings server</a>
-            <a href="#techtonique-r">R</a>
-            <a href="#techtonique-python">Python</a>
-            <a href="#techtonique-ajax">Javascript (AJAX)</a>
-            <a href="#techtonique-react">React</a>
-        </div>
+        <h1 id="xlwings-server">Simple server for <a href="https:www.techtonique.net/about">Techtonique API</a> calls in Microsoft Excel</h1>    
 
-        <h1 id="xlwings-server">Simple xlwings server for <a href="https:www.techtonique.net">Techtonique API</a></h1>    
-            <h2>Get your Techtonique API token first</h2>     
             <p>
-                To get your Techtonique API token and be able to do Machine Learning directly from your desktop, you 
-                need to register at <a href="https:www.techtonique.net">https:www.techtonique.net</a>, login,  
-                and navigate to <a href="https:www.techtonique.net/token">https:www.techtonique.net/token</a>. Thanks 
-                to the way it was designed <a href="https:www.techtonique.net">Techtonique API</a> allows you to do  
-                Machine Learning with any language that <a href="https://curlconverter.com/http/">you like</a>.
+                This is a server (that you can <a href="https://github.com/Techtonique/techtonique-xlwings-server">reproduce</a>) 
+                allowing you to make <a href="https:www.techtonique.net/about">Techtonique API calls</a> from Microsoft Excel. 
             </p>
 
-            <h2>xlwings</h2>
-            <h3>Activate an xlwings developer key</h3>
-            <p>
-                <a href="https://github.com/Techtonique/techtonique-excel/tree/main/xlwings-server-demo">xlwings server</a> is one of the tools that will allow you to use Techtonique API directly in Excel.
-                To use xlwings PRO locally in your development environment, it’s easiest to run the following command:
-            </p>
-            <pre>
-                <code class="language-bash">
-                    xlwings license update -k YOUR_LICENSE_KEY
-                </code>
-            </pre>    
-
-            <h3>xlwings License Key for non-commercial Purpose:</h3> 
-            <p>        
-                To use xlwings PRO for free in a non-commercial context (as defined by the PolyForm Noncommercial License 1.0.0) use the following license key: noncommercial (Note that you need at least xlwings 0.26.0).
-            </p>
+        <h2>Get your Techtonique API token first</h2>     
+        <p>                
+            <a href="https:www.techtonique.net/howtoapi">Techtonique's API</a> allows you to do  
+            Machine Learning from your desktop, using the programming language that 
+            <a href="https://curlconverter.com/http/">you like</a>. This server is specific to 
+            Visual Basic for Excel, and relies on <a href="https://server.xlwings.org/en/latest/">xlwings server</a>. 
             
-            <h2>In VBA Excel, create</h2>
-            See <a href="https://github.com/Techtonique/techtonique-excel/blob/main/xlwings-server-demo/demo-forecasting.xlsm">example xlsm file</a>
+            In order to get your API token, 
+            you need to register at <a href="https:www.techtonique.net">https:www.techtonique.net</a>, 
+            login, and navigate to <a href="https:www.techtonique.net/token">https:www.techtonique.net/token</a>. 
+        </p>
+
             
-            <p>
-                <pre>
-                    <code class="language-vbscript">
-                        Sub SampleRemoteCall()
+        <h1>VBA Excel example: </h2>
+        
+        <p>
+            See <a href="https://github.com/Techtonique/techtonique-excel/blob/main/xlwings-server-demo/demo-forecasting.xlsm">example xlsm file</a>.
+            After clicking the button in the Excel file, you should get something like:
 
-                        Dim BASE_URL As String
-                        Dim token, token_query As String
-                        Dim file_name, file_name_query As String
-                        Dim api_route, api_route_query As String
-                        Dim other_query, full_query As String
-                        
-                        ' provide only these 3
-                        BASE_URL = "https://techtonique-xlwings-server-1793f0ffd160.herokuapp.com/"
-                        token = "Y0UR_TOKEN"
-                        file_name = "https://raw.githubusercontent.com/Techtonique/datasets/refs/heads/main/time_series/univariate/AirPassengers.csv"
-                        api_route = "forecastingreglinear"
-                        
-                        token_query = "token=" & token
-                        file_name_query = "&filename=" & file_name
-                        api_route_query = "&apiroute=" & api_route
-                        other_query = "&method=LarsCV"
-                        full_query = BASE_URL & "forecastingapicall?" & token_query & file_name_query & api_route_query & other_query
-                        
-                        RunRemotePython full_query, apiKey:="DEVELOPMENT"
-                    End Sub                        
-                    </code>                    
-                </pre>           
-                You should obtain something like this:
-                <br> 
-                <br> 
-                <img src="static/result-vba.png" alt="Example output from VBA">
-            </p>
+            <br>
+            <br>
 
-    <h1 id="#techtonique-r">R | <a href="#">Top</a></h1>    
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Animi, esse cumque? 
-        Temporibus commodi unde beatae quisquam at ullam laboriosam blanditiis 
-        perferendis consequuntur qui necessitatibus et corrupti, ut totam natus consequatur.
-    </p>
+            <img height="100px" src="../static/result-vba.png" alt="result vba techtonique api call">
+        </p>
 
-    <h1 id="#techtonique-python">Python | <a href="#">Top</a></h1>    
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Animi, esse cumque? 
-        Temporibus commodi unde beatae quisquam at ullam laboriosam blanditiis 
-        perferendis consequuntur qui necessitatibus et corrupti, ut totam natus consequatur.
-    </p>
-
-    <h1 id="#techtonique-ajax">Javascript (AJAX) | <a href="#">Top</a></h1>
-    
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Animi, esse cumque? 
-        Temporibus commodi unde beatae quisquam at ullam laboriosam blanditiis 
-        perferendis consequuntur qui necessitatibus et corrupti, ut totam natus consequatur.</p>
-    <h1 id="#techtonique-react">Javascript (React) | <a href="#">Top</a> </h1>
-    
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Animi, esse cumque? 
-        Temporibus commodi unde beatae quisquam at ullam laboriosam blanditiis 
-        perferendis consequuntur qui necessitatibus et corrupti, ut totam natus consequatur.</p>
-    </div>
-    
+        <footer>
+            <a href="https://thierrymoudiki.github.io"> &#169; T. Moudiki</a>
+        </footer>
+                
     <script>
         document.addEventListener('DOMContentLoaded', (event) => {
           hljs.highlightAll();
