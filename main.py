@@ -1,17 +1,25 @@
-import json 
-import mimetypes
 import os
 import requests
 import xlwings as xw
 
 from urllib.parse import urlparse
-from fastapi import Body, FastAPI, status, UploadFile, File
+from fastapi import Body, FastAPI, status, UploadFile, File, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import PlainTextResponse, FileResponse
+from fastapi.responses import PlainTextResponse, FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from pathlib import Path
 from dotenv import load_dotenv
 from config import BASE_URL
+from pydantic import BaseModel
+import openpyxl
+from openpyxl.utils import get_column_letter
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
+import openpyxl
+from openpyxl.utils import get_column_letter
+
+from utils import call_api
+
 
 # Load environment variables from .env file
 load_dotenv()
@@ -38,50 +46,11 @@ def api_call(token: str,
              replications: int = 10,
              h: int = 10):        
 
-    headers = {
-    'Authorization': 'Bearer ' + token,
-    }
-
-    params = {'method': method, 
-    'n_hidden_features': str(n_hidden_features),
-    'lags': str(lags),
-    'type_pi': str(type_pi),
-    'replications': str(replications),
-    'h': str(h)}
-
-    # Download the file from the URL
-    response = requests.get(filename)
-    
-    if response.status_code != 200:
-        return {"error": "Failed to download file"}
-
-    # Extract the filename from the URL
-    parsed_url = urlparse(filename)
-    local_filename = os.path.basename(parsed_url.path)
-    
-    # Get the content type
-    content_type, _ = mimetypes.guess_type(local_filename)
-
-    # If content_type couldn't be guessed, default to 'application/octet-stream'
-    if content_type is None:
-        content_type = 'application/octet-stream'
-
-    # Prepare the file for uploading (file content, filename, and content_type)
-    file_content = response.content
-    files = {
-        'file': (local_filename, file_content, content_type)
-    }
-
-    response = requests.post(BASE_URL + apiroute, 
-        params=params, headers=headers, 
-        files=files)
-
-    res = response.json()
-
-    # transform strings to lists
-    mean = json.loads(res["mean"])
-    lower = json.loads(res["lower"])
-    upper = json.loads(res["upper"])
+    mean, lower, upper = call_api(token, apiroute, filename, 
+                                  method, n_hidden_features, 
+                                  lags, type_pi, 
+                                  replications, 
+                                  h)
 
     # Instantiate a Book object with the deserialized request body
     with xw.Book(json=data) as book:
@@ -108,6 +77,27 @@ async def exception_handler(request, exception):
         str(exception), status_code=status.HTTP_500_INTERNAL_SERVER_ERROR
     )
 
+@app.post("/forecastingapicall2")
+def api_call2(file_path: str,
+              sheet_name: str,
+              token: str, 
+                apiroute: str,  
+                filename: str,                       
+                data: dict = Body,
+                method: str = 'RidgeCV',
+                n_hidden_features: int = 5,
+                lags: int = 20,
+                type_pi: str = 'gaussian',
+                replications: int = 10,
+                h: int = 10,):        
+
+    mean, lower, upper = call_api(token, apiroute, filename, 
+                                  method, n_hidden_features, 
+                                  lags, type_pi, 
+                                  replications, 
+                                  h)
+        
+    return JSONResponse(content={"mean": mean, "lower": lower, "upper": upper})
 
 # Office Scripts and custom functions in Excel on the web require CORS
 cors_app = CORSMiddleware(
@@ -132,4 +122,15 @@ if __name__ == "__main__":
     else:
         # Running locally
         uvicorn.run("main:cors_app", host="0.0.0.0", port=8001, reload=True)
+
+
+
+
+
+
+
+
+
+
+
 
