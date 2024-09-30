@@ -5,6 +5,7 @@ import requests
 from urllib.parse import urlparse
 from config import BASE_URL
 
+# used by "/forecastingapicall2"
 def call_api(token: str, 
              apiroute: str,  
              filename: str,          
@@ -60,8 +61,15 @@ def call_api(token: str,
         mean = json.loads(res["mean"])
         lower = json.loads(res["lower"])
         upper = json.loads(res["upper"])
+        try:
+            sims = json.loads(res["sims"])
+        except Exception:
+            pass 
     except Exception as e:
         print("check validity of token")
         return {"error": str(e)}
-
-    return mean, lower, upper    
+    
+    try:
+        return mean, lower, upper, sims     
+    except Exception as e:
+        return mean, lower, upper    

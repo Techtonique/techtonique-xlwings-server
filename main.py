@@ -86,15 +86,31 @@ def api_call2(token: str,
               lags: int = 20,
               type_pi: str = 'gaussian',
               replications: int = 10,
+              kernel: str = None,
               h: int = 10,):        
+    
+    try: 
 
-    mean, lower, upper = call_api(token, apiroute, filename, 
-                                  method, n_hidden_features, 
-                                  lags, type_pi, 
-                                  replications, 
-                                  h)
-        
-    return JSONResponse(content={"mean": mean, "lower": lower, "upper": upper})
+        mean, lower, upper, sims = call_api(token, apiroute, filename, 
+                                    method, n_hidden_features, 
+                                    lags, type_pi, 
+                                    replications, 
+                                    h)
+            
+        return JSONResponse(content={"mean": mean, "lower": lower, 
+                                     "upper": upper, "sims": sims})
+    
+    except Exception: 
+
+        mean, lower, upper = call_api(token, apiroute, filename, 
+                                    method, n_hidden_features, 
+                                    lags, type_pi, 
+                                    replications, 
+                                    h)
+            
+        return JSONResponse(content={"mean": mean, 
+                                     "lower": lower, 
+                                     "upper": upper})
 
 # Office Scripts and custom functions in Excel on the web require CORS
 cors_app = CORSMiddleware(
