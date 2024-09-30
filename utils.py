@@ -20,7 +20,7 @@ def call_api(token: str,
     'Authorization': 'Bearer ' + token,
     }
 
-    params = {'base_model': method, 
+    params = {'base_model': str(method), 
     'n_hidden_features': str(n_hidden_features),
     'lags': str(lags),
     'type_pi': str(type_pi),
