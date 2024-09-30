@@ -78,18 +78,15 @@ async def exception_handler(request, exception):
     )
 
 @app.post("/forecastingapicall2")
-def api_call2(file_path: str,
-              sheet_name: str,
-              token: str, 
-                apiroute: str,  
-                filename: str,                       
-                data: dict = Body,
-                method: str = 'RidgeCV',
-                n_hidden_features: int = 5,
-                lags: int = 20,
-                type_pi: str = 'gaussian',
-                replications: int = 10,
-                h: int = 10,):        
+def api_call2(token: str, 
+              apiroute: str,  
+              filename: str,                       
+              method: str = 'RidgeCV',
+              n_hidden_features: int = 5,
+              lags: int = 20,
+              type_pi: str = 'gaussian',
+              replications: int = 10,
+              h: int = 10,):        
 
     mean, lower, upper = call_api(token, apiroute, filename, 
                                   method, n_hidden_features, 
