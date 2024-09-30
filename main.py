@@ -85,8 +85,7 @@ def api_call2(token: str,
               n_hidden_features: int = 5,
               lags: int = 20,
               type_pi: str = 'gaussian',
-              replications: int = 10,
-              kernel: str = None,
+              replications: int = 50,              
               h: int = 10,):        
     
     try: 

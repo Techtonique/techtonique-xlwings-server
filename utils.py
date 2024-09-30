@@ -13,14 +13,14 @@ def call_api(token: str,
              n_hidden_features: int = 5,
              lags: int = 20,
              type_pi: str = 'gaussian',
-             replications: int = 10,
+             replications: int = 50,
              h: int = 10):        
 
     headers = {
     'Authorization': 'Bearer ' + token,
     }
 
-    params = {'method': method, 
+    params = {'base_model': method, 
     'n_hidden_features': str(n_hidden_features),
     'lags': str(lags),
     'type_pi': str(type_pi),
